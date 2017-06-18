@@ -31,8 +31,32 @@ val Oswald = new Cat ( name = "Oswald", color = "black", food = "milk")
 val Henderson = new Cat ( name = "Henderson", color = "ginger", food = "chips")
 val Qen = new Cat ( name = "Quen", color = "tabby and white", food = "curry")
 
-def ChipShop(in: Cat) = {if (in.food == "chips") true; else false}
 
-println(ChipShop(Oswald))
-println(ChipShop(Henderson))
+/**object argh {
+def a = {
+println("a")
+1
+}
+**/
+//object for one-time things, classes for repeated objects.
+//e.g. we could make a ChipShop instance of a Shop class. 
+object ChipShop {
+	def willServe(in:Cat):Boolean = {
+		if (in.food == "chips") 
+			true 
+		else 
+			false}
+}
 
+
+println(ChipShop.willServe(Oswald))
+println(ChipShop.willServe(Henderson))
+
+class Counter (val count: Int ) {
+	def inc = new Counter(count + 1)
+	def dec = new Counter(count - 1)
+}
+
+println(new Counter(0).dec.dec.dec.dec.count)
+//println(t)
+println ("assi".split(" ").toList.map( x => x+1))//.map("a" => "x")
