@@ -27,18 +27,46 @@ object Main {
    * Exercise 2
    */
     def balance(chars: List[Char]): Boolean = {
-      // note edge cases for false: "())("
-      def parens_evaluator(in_char: Char): Int = {
-        if (in_char == "(") 1
-        else if (in_char == ")") -1
-        else 0}
+      // iterate over `chars`. Count # of parens
 
-      val balanced:Int = 0
-      for (c <- chars) {
-        val balanced: Int = balanced + parens_evaluator(c)
-        print ("Ball at" + balanced)}
+      def evaluator(in:Char): Int = {
+        println("run evaluator")
+        if (in == '(') { + 1}
+        else if (in == ')') {-1}
+        else {0}
+      }
 
-      balanced == 0}
+      /**chars.isEmpty: Boolean returns whether a list is empty
+      chars.head: Char returns the first element of the list
+      chars.tail: List[Char] returns the list without the first element**/
+
+      def loop(loop_in:List[Char], acc: Int):Int = {
+        if (loop_in.isEmpty) {
+          println("returnign" + acc)
+          acc}
+      else {
+        println("looping over" + loop_in.tail)
+        loop(loop_in.tail, acc + evaluator(loop_in.head))}
+      }
+
+
+      return loop(chars, 0) == 0
+        }
+
+
+
+      val x = balance("deppski (hey))(".toList)
+      println(x)
+      // def tailrecfac(in:Int): Int = {
+      //   def loop(acc: Int, in: Int): Int =
+      //     if (in == 0) acc
+      //     else {println("looping at " + (in - 1)); loop(acc * in, in - 1)}
+      //   //note that 1 inits out accumulator; note that it is the right return for in = 0, as needed
+      //   loop(1, in)
+      // }
+
+
+
 
   /**
    * Exercise 3
