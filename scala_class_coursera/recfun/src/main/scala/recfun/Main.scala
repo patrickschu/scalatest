@@ -30,11 +30,13 @@ object Main {
       // iterate over `chars`. Count # of parens
       // jeez this was difficult, and is still not quite 100 %
       // we essentially run the loop over every item in chars, adding to the iterator `acc`
+
       def evaluator(in:Char): Int = {
         //println("run evaluator")
-        if (in == '(') {println("plus one"); 1}
-        else if (in == ')') {println("neg one"); (-1)}
-        else {0}
+        if (in == '(') {println("plus one"); val t = 1}
+        else if (in == ')') {println("neg one"); val t = -1}
+        else {val t = 0}
+        t
       }
 
       /**chars.isEmpty: Boolean returns whether a list is empty
@@ -49,15 +51,16 @@ object Main {
             if (acc < -1 | acc > 1) {1}
             else{
             println("looping over" + acc)
-            loop(loop_in.tail, acc + (evaluator(loop_in.head)))}
+            loop(loop_in.tail, (acc + evaluator(loop_in.head)))}
           }}
 
         if (chars.last == '(' | chars.head == ')') {false}
-        else {val t = loop(chars, 0); println("final " + t); t == 0}
+        else {val t = loop(chars, 0); t == 0}
         }
 
-
-
+        //val t = "(if (zero? x) max (/ 1 x))".toList
+        //val x = balance(t)
+        //println (x)
 
       // def tailrecfac(in:Int): Int = {
       //   def loop(acc: Int, in: Int): Int =
