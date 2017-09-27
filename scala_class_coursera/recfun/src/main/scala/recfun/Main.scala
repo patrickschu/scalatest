@@ -26,49 +26,25 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = {
-      // iterate over `chars`. Count # of parens
-      // jeez this was difficult, and is still not quite 100 %
-      // we essentially run the loop over every item in chars, adding to the iterator `acc`
+   def balance(chars: List[Char]) : Boolean =
+     {
+       def isParens(char: Char): Int =
+         if (char == ')') {-1}
+         else if (char == '(') {1}
+         else {0}
 
-      def evaluator(in:Char): Int = {
-        //println("run evaluator")
-        if (in == '(') {println("plus one"); val t = 1}
-        else if (in == ')') {println("neg one"); val t = -1}
-        else {val t = 0}
-        t
-      }
+       def loop(chars: List[Char], acc: Int): Int =
+       {
+         if (chars.isEmpty) {acc}
+         else if (acc + isParens(chars.head) < 0) {-1}
+         else {
+           println(chars.head)
+           loop(chars.tail, acc + isParens(chars.head))
+           }
+         }
+         loop(chars, 0) == 0
+       }
 
-      /**chars.isEmpty: Boolean returns whether a list is empty
-      chars.head: Char returns the first element of the list
-      chars.tail: List[Char] returns the list without the first element**/
-      def loop(loop_in:List[Char], acc: Int):Int = {
-        if (loop_in.isEmpty) {
-          println("returnign" + acc)
-          acc}
-        //else if (loop_in.last == '(' | loop_in.head == ')') {println("catch ex"); 1}
-          else {
-            if (acc < -1 | acc > 1) {1}
-            else{
-            println("looping over" + acc)
-            loop(loop_in.tail, (acc + evaluator(loop_in.head)))}
-          }}
-
-        if (chars.last == '(' | chars.head == ')') {false}
-        else {val t = loop(chars, 0); t == 0}
-        }
-
-        //val t = "(if (zero? x) max (/ 1 x))".toList
-        //val x = balance(t)
-        //println (x)
-
-      // def tailrecfac(in:Int): Int = {
-      //   def loop(acc: Int, in: Int): Int =
-      //     if (in == 0) acc
-      //     else {println("looping at " + (in - 1)); loop(acc * in, in - 1)}
-      //   //note that 1 inits out accumulator; note that it is the right return for in = 0, as needed
-      //   loop(1, in)
-      // }
 
 
 
